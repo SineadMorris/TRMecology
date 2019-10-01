@@ -3,11 +3,11 @@ title: "Analysis of T$_{\\text{RM}}$ population dynamics"
 output: github_document
 ---
 
-<script type="text/x-mathjax-config">
+<!--<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
-</script>
+</script>-->
 
 This approach illustrates how a simple mathematical model can be applied to experimental data of T$_{\text{RM}}$ in nonlymphoid tissues. The aim is to estimate the clonal half-life of each population and project dynamics beyond experimental timeframes. 
 
