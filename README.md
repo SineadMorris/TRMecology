@@ -39,7 +39,7 @@ require(tidyverse)
 require(cowplot)
 ```
 
-Then define settings for the final plot:
+And define settings for the final plot:
 
 ``` r
 basetext <- 10
