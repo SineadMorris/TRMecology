@@ -9,13 +9,19 @@ MathJax.Hub.Config({
 });
 </script>-->
 
-This approach illustrates how a simple mathematical model can be applied to experimental data of T<sub>RM</sub> in nonlymphoid tissues. The aim is to estimate the clonal half-life of each population and project dynamics beyond experimental timeframes. 
+This approach illustrates how a simple mathematical model can be applied to experimental data of T<sub>RM</sub> in nonlymphoid tissues. The aim is to estimate the clonal half-life of each population and project dynamics beyond experimental timeframes. For full details of the model, see Morris et al (2019) Journal of Immunology [In press]. Details of the data can be found in:
+
+- Pizzolla et al (2017) Science Immunology, doi:10.1126/sciimmunol.aam6970
+- Slutter et al (2017) Science Immunology, doi:10.1126/sciimmunol.aag2031
+
 
 ### Modeling approach
 
 A simple model of homeostasis assumes new T<sub>RM</sub> cells ($T$) are recruited from a precursor subset at rate $r$, proliferate at rate $p$, and decay at rate $d$. These dynamics be expressed mathematically as
 
-$$\begin{aligned} \frac{dT}{dt} & = r + p T - d T \\ & = r - (d - p)T, \end{aligned}$$
+<!--$$\begin{aligned} \frac{dT}{dt} & = r + p T - d T \\ & = r - (d - p)T, \end{aligned}$$-->
+
+$$\frac{dT}{dt} = r - (d - p)T,$$
 
 where $d-p$ is the net loss rate from the population. If there is no recruitment from precursor populations, then $r=0$ and Eqn 1 can be solved to give
 
@@ -27,13 +33,7 @@ T<sub>RM</sub> loss can be modeled by log-transforming Eq 2 to obtain a linear r
 
 $$ \log(T) = \log(T^0) - (d-p)t.$$
 
-Using least squares optimization, we fit Eq 3 to the log-transformed measurements from each dataset and estimate the corresponding net loss rate and clonal half-life.
-For more details on motivation for the model, see Morris et al (2019) Journal of Immunology. Details of the data can be found in:
-
-- Pizzolla et al (2017) Science Immunology, doi:10.1126/sciimmunol.aam6970
-- Slutter et al (2017) Science Immunology, doi:10.1126/sciimmunol.aag2031
-
-Note that in a more thorough analysis, these predictions would be compared with alternative models to assess the most parsimonious description of the data.
+Using least squares optimization, we fit Eq 3 to the log-transformed measurements from each dataset and estimate the corresponding net loss rate and clonal half-life. Note that in a more thorough analysis, this model would be compared with alternative models to assess the most parsimonious description of the data.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, cache = FALSE)
