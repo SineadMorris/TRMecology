@@ -1,4 +1,4 @@
-Analysis of T**<sub>RM</sub> population dynamics
+Analysis of T<sub>RM</sub> population dynamics
 ================
 
 <!--<script type="text/x-mathjax-config">
@@ -6,17 +6,23 @@ MathJax.Hub.Config({
   TeX: { equationNumbers: { autoNumber: "AMS" } }
 });
 </script>-->
-This approach illustrates how a simple mathematical model can be applied to experimental data of T**<sub>RM</sub> in nonlymphoid tissues. The aim is to estimate the clonal half-life of each population and project dynamics beyond experimental timeframes.
+This approach illustrates how a simple mathematical model can be applied to experimental data of T<sub>RM</sub> in nonlymphoid tissues. The aim is to estimate the clonal half-life of each population and project dynamics beyond experimental timeframes.
 
 ### Modeling approach
 
-A simple model of homeostasis assumes new T**<sub>RM</sub> cells (*T*) are recruited from a precursor subset at rate *r*, proliferate at rate *p*, and decay at rate *d*. These dynamics be expressed mathematically as
+A simple model of homeostasis assumes new T<sub>RM</sub> cells (*T*) are recruited from a precursor subset at rate *r*, proliferate at rate *p*, and decay at rate *d*. These dynamics be expressed mathematically as
+
+$$\\begin{aligned} \\frac{dT}{dt} & = r + p T - d T \\\\ & = r - (d - p)T, \\end{aligned}$$
 
 where *d* − *p* is the net loss rate from the population. If there is no recruitment from precursor populations, then *r* = 0 and Eqn 1 can be solved to give
 
-where *T*<sup>0</sup> is the initial number of T**<sub>RM</sub>. Thus, assuming cells are lost at a faster rate than they divide (i.e. *d* &gt; *p*), the clonal population will decline exponentially at rate (*d* − *p*), with an average half-life of log(2)/(*d* − *p*).
+*T* = *T*<sup>0</sup>exp<sup>−(*d* − *p*)*t*</sup>,
 
-T**<sub>RM</sub> loss can be modeled by log-transforming Eq 2 to obtain a linear regression model with intercept log(*T*<sup>0</sup>) and slope −(*d* − *p*), i.e.
+where *T*<sup>0</sup> is the initial number of T<sub>RM</sub>. Thus, assuming cells are lost at a faster rate than they divide (i.e. *d* &gt; *p*), the clonal population will decline exponentially at rate (*d* − *p*), with an average half-life of log(2)/(*d* − *p*).
+
+T<sub>RM</sub> loss can be modeled by log-transforming Eq 2 to obtain a linear regression model with intercept log(*T*<sup>0</sup>) and slope −(*d* − *p*), i.e.
+
+log(*T*)=log(*T*<sup>0</sup>)−(*d* − *p*)*t*.
 
 Using least squares optimization, we fit Eq 3 to the log-transformed measurements from each dataset and estimate the corresponding net loss rate and clonal half-life. For more details on motivation for the model, see Morris et al (2019) Journal of Immunology. Details of the data can be found in:
 
@@ -27,16 +33,14 @@ Note that in a more thorough analysis, these predictions would be compared with 
 
 ### Analysis
 
-To implement the analysis in R, we use the following steps.
-
-1.  Load the required packages:
+To implement the analysis in R, we first load the required packages:
 
 ``` r
 require(tidyverse)
 require(cowplot)
 ```
 
-1.  Define settings for the final plot:
+Then define settings for the final plot:
 
 ``` r
 basetext <- 10
@@ -55,7 +59,7 @@ ytitle <- expression(CD69^{"+"}~CD103^{"+"}~T[RM])
 textsize <- 10
 ```
 
-1.  Define functions that will be used in the analysis. Note that for the response variable we use the approximation log(T**<sub>RM</sub> + 1) to avoid NAs when T**<sub>RM</sub> = 0. This does not substantially impact our results, and is preferable to omitting important information contained in those undetectable measurements.
+We then define functions that will be used in the analysis. Note that for the response variable we use the approximation log(T<sub>RM</sub> + 1) to avoid NAs when T<sub>RM</sub> = 0. This does not substantially impact our results, and is preferable to omitting important information contained in those undetectable measurements.
 
 ``` r
 # 1. Estimate parameters and 95% CIs by fitting linear model
@@ -88,14 +92,14 @@ getpredictions <- function(data, xnew){
 }
 ```
 
-1.  Load the data:
+After this, we load the data:
 
 ``` r
 load("data_pizzolla.RData")
 load("data_slutter.RData")
 ```
 
-1.  Carry out analysis for each data set:
+And carry out analysis for each data set:
 
 ``` r
 ## Pizzolla et al analysis ----------------------------------
@@ -125,7 +129,7 @@ predict_slutter <- data_slutter %>% group_by(tissue, study) %>%
     do(getpredictions(data = ., xnew = xnew) ) %>% ungroup()
 ```
 
-1.  Plot the results:
+Then we plot the results:
 
 ``` r
 plot_pizzolla <- ggplot(data = data_pizzolla, aes(x = day, y = Trm + 1)) + 
@@ -161,7 +165,7 @@ print(
 
 ![](README_files/figure-markdown_github/plotting-1.png)
 
-1.  Finally, to estimate the time at which OT-I (Panel A) and NP366 (Panel B) T**<sub>RM</sub> in the lung become undetectable, we simply find the first time at which their predicted population sizes fall below one:
+Finally, to estimate the time at which OT-I (Panel A) and NP366 (Panel B) T<sub>RM</sub> in the lung become undetectable, we simply find the first time at which their predicted population sizes fall below one:
 
 ``` r
 predict_pizzolla %>% filter(tissue == "Lung", Trm < 1) %>% 
