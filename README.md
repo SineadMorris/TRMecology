@@ -8,27 +8,28 @@ MathJax.Hub.Config({
 </script>-->
 This approach illustrates how a simple mathematical model can be applied to experimental data of T<sub>RM</sub> in nonlymphoid tissues. The aim is to estimate the clonal half-life of each population and project dynamics beyond experimental timeframes. For full details of the model, see Morris et al (2019) Journal of Immunology \[In press\]. Details of the data can be found in:
 
--   Pizzolla et al (2017) Science Immunology, <doi:10.1126/sciimmunol.aam6970>
--   Slutter et al (2017) Science Immunology, <doi:10.1126/sciimmunol.aag2031>
+-   Pizzolla et al (2017) Science Immunology, [doi:10.1126/sciimmunol.aam6970](https://immunology.sciencemag.org/content/2/12/eaam6970)
+-   Slutter et al (2017) Science Immunology, [doi:10.1126/sciimmunol.aag2031](https://immunology.sciencemag.org/content/2/7/eaag2031)
 
 ### Modeling approach
 
 A simple model of homeostasis assumes new T<sub>RM</sub> cells (*T*) are recruited from a precursor subset at rate *r*, proliferate at rate *p*, and decay at rate *d*. These dynamics be expressed mathematically as
 
 <!--$$\begin{aligned} \frac{dT}{dt} & = r + p T - d T \\ & = r - (d - p)T, \end{aligned}$$-->
-$$\\frac{dT}{dt} = r - (d - p)T,$$
+<!--$$\frac{dT}{dt} = r - (d - p)T,$$-->
+<sup>dT</sup>⁄<sub>dt</sub> = r - (d - p)T,
 
-where *d* − *p* is the net loss rate from the population. If there is no recruitment from precursor populations, then *r* = 0 and Eqn 1 can be solved to give
+where *d* − *p* is the net loss rate from the population. If there is no recruitment from precursor populations, then *r* = 0 and the above equation can be solved to give
 
 *T* = *T*<sup>0</sup>exp<sup>−(*d* − *p*)*t*</sup>,
 
 where *T*<sup>0</sup> is the initial number of T<sub>RM</sub>. Thus, assuming cells are lost at a faster rate than they divide (i.e. *d* &gt; *p*), the clonal population will decline exponentially at rate (*d* − *p*), with an average half-life of log(2)/(*d* − *p*).
 
-T<sub>RM</sub> loss can be modeled by log-transforming Eq 2 to obtain a linear regression model with intercept log(*T*<sup>0</sup>) and slope −(*d* − *p*), i.e.
+T<sub>RM</sub> loss can be modeled by log-transforming this second equation to obtain a linear regression model with intercept log(*T*<sup>0</sup>) and slope −(*d* − *p*), i.e.
 
 log(*T*)=log(*T*<sup>0</sup>)−(*d* − *p*)*t*.
 
-Using least squares optimization, we fit Eq 3 to the log-transformed measurements from each dataset and estimate the corresponding net loss rate and clonal half-life. Note that in a more thorough analysis, this model would be compared with alternative models to assess the most parsimonious description of the data.
+Using least squares optimization, we fit this equation to the log-transformed measurements from each dataset and estimate the corresponding net loss rate and clonal half-life. Note that in a more thorough analysis, this model would be compared with alternative models to assess the most parsimonious description of the data.
 
 ### Analysis
 
