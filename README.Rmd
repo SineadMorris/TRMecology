@@ -9,7 +9,7 @@ MathJax.Hub.Config({
 });
 </script>-->
 
-This approach illustrates how a simple mathematical model can be applied to experimental data of T<sub>RM</sub> in nonlymphoid tissues. The aim is to estimate the clonal half-life of each population and project dynamics beyond experimental timeframes. For full details of the model, see Morris et al (2019) Journal of Immunology [In press]. Details of the data can be found in:
+This approach illustrates how a simple mathematical model can be applied to experimental data of T<sub>RM</sub> in nonlymphoid tissues. The aim is to estimate the clonal half-life of each population and project dynamics beyond experimental timeframes. For full details of the model, see Morris et al (2019) Journal of Immunology ([doi:10.4049/jimmunol.1900767](https://doi.org/10.4049/jimmunol.1900767)). Details of the data collection methods can be found in:
 
 - Pizzolla et al (2017) Science Immunology, [doi:10.1126/sciimmunol.aam6970](https://immunology.sciencemag.org/content/2/12/eaam6970)
 - Slutter et al (2017) Science Immunology, [doi:10.1126/sciimmunol.aag2031](https://immunology.sciencemag.org/content/2/7/eaag2031)
